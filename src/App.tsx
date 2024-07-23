@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { keyframes, ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import ProfileContainer from "./components/ProfileContainer";
 import HomeView from "./views/HomeView";
@@ -9,6 +9,12 @@ import ContentContainer from "./components/ContentContainer";
 import { theme } from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
 
+import reactLogo from "./assets/reactLogo.png"
+import jsLogo from "./assets/jsLogo.png"
+import pythonLogo from "./assets/pythonLogo.png"
+import tsLogo from "./assets/tsLogo.png"
+import vueLogo from "./assets/vueLogo.png"
+
 const MainContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -16,82 +22,59 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 
-const Bubble = styled.div<{ x: number; y: number }>`
-  position: absolute;
-  left: ${({ x }) => x}px;
-  top: ${({ y }) => y}px;
-  width: 100px;
-  z-index: -1;
-  height: 100px;
-  background-color: purple;
-  border-radius: 50%;
+const bubbleAnimation = keyframes`
+  0% {
+    width: 0px;
+    height: 0px;
+    transform: translate(0, 0);
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    transform: translate(0, -100px);
+  }
 `;
 
-interface BubbleState {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-}
+const Bubble = styled.img<{ x: number; y: number, delay: number }>`
+  position: absolute;
+  left: ${({ x }) => x}%;
+  bottom: ${({ y }) => y}%;
+  width: 0px;
+  padding: 20px;
+  height: 0px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 100%;
+  animation: ${bubbleAnimation} 10s ${({delay})=>delay}s infinite ease-out ;
 
-const useBubbles = (count: number) => {
-  const [bubbles, setBubbles] = useState<BubbleState[]>(() =>
-    Array.from({ length: count }, () => ({
-      x: Math.random() * window.innerWidth /1.2,
-      y: Math.random() * window.innerHeight/ 1.2,
-      vx: (Math.random()) * 2,
-      vy: (Math.random()) * 2,
-    }))
-  );
-
-  useEffect(() => {
-    let animationFrameId: number;
-    const update = () => {
-      setBubbles((bubbles) =>
-        bubbles.map((bubble, i) => {
-          let { x, y, vx, vy } = bubble;
-
-          x += vx;
-          y += vy;
-
-          if (x < 0 || x > window.innerWidth - 100) vx = -vx;
-          if (y < 0 || y > window.innerHeight - 100) vy = -vy;
-
-          // bubbles.forEach((otherBubble, j) => {
-          //   if (i !== j) {
-          //     const dx = Math.abs(otherBubble.x - x)
-          //     const dy = Math.abs(otherBubble.y - y)
-          //     const distance = Math.sqrt(dx * dx + dy * dy);
-          //     if (distance < 100) {
-          //         vx = -vx
-          //         vy = -vy;
-          //     }
-          //   }
-          // });
-
-          return { x, y, vx, vy };
-        })
-      );
-      animationFrameId = requestAnimationFrame(update);
-    };
-    update();
-    return () => cancelAnimationFrame(animationFrameId);
-  }, []);
-
-  return bubbles;
-};
+  &::after{
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    background-color: white;
+  }
+`;
 
 const App: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bubbles = useBubbles(5);
+  const [themeColors, setThemeColors] = useState(theme)
+
+  function changeThemeColors(text: string, bg: string, hover: string) {
+    setThemeColors({ colors:{ text, bg, hover } })
+  }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeColors}>
       <GlobalStyle />
-      <MainContainer ref={containerRef}>
-        {bubbles.map((bubble, index) => (
-          <Bubble key={index} x={bubble.x} y={bubble.y} />
-        ))}
+      <MainContainer >
+        <Bubble delay={0} x={10} y={50} src={reactLogo} onClick={()=>changeThemeColors("#05c2cf", "#150074","#0000ff")}/>
+        <Bubble delay={1} x={20} y={5} src={jsLogo} onClick={()=>changeThemeColors("#000000", "#d6e600","#0000ff")}/>
+        <Bubble delay={1.4} x={40} y={73} src={pythonLogo} onClick={()=>changeThemeColors("#fffb00", "#060057","#0000ff")}/>
+        <Bubble delay={0.5} x={60} y={5} src={tsLogo} onClick={()=>changeThemeColors("#0026ff", "#ffffff","#0000ff")}/>
+        <Bubble delay={1.7} x={80} y={43} src={vueLogo} onClick={()=>changeThemeColors("#017507", "#01025c","#0000ff")}/>
         <ProfileContainer />
         <BrowserRouter>
           <Routes>
