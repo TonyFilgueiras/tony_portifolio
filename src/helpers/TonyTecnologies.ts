@@ -6,11 +6,11 @@ import vueLogo from "../assets/vueLogo.png";
 
 import reactBanner from "../assets/banners/reactBanner.png"
 import jsBanner from "../assets/banners/jsBanner.png"
-// import tsBanner from "../assets/banners/tsBanner.png"
+import tsBanner from "../assets/banners/tsBanner.png"
 import vueBanner from "../assets/banners/vueBanner.png"
 import pythonBanner from "../assets/banners/pythonBanner.png"
 
-interface Tecnologies {
+export interface Tecnologies {
   name: string
   banner: string
   logo: string
@@ -40,17 +40,17 @@ const tonyTecnologies: Tecnologies[] = [
     bgColor: '#F0DB4F',
     xPosition: 20,
     yPosition: 5,
-    animationDelay: 1
+    animationDelay: 4
   },
   {
     name: "Typescript",
-    banner: "",
+    banner: tsBanner,
     logo: tsLogo,
     textColor: "#dddddd",
     bgColor: '#3178c6',
     xPosition: 60,
     yPosition: 5,
-    animationDelay: 0.5
+    animationDelay: 2.5
   },
   {
     name: "React",
@@ -70,7 +70,7 @@ const tonyTecnologies: Tecnologies[] = [
     bgColor: '#35495E',
     xPosition: 80,
     yPosition: 43,
-    animationDelay: 1.7
+    animationDelay: 5.4
   },
 
 ];

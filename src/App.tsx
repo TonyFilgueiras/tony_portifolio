@@ -9,9 +9,10 @@ import IndexView from "./views/IndexView";
 import { theme } from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import fadein from "./styles/animations/FadeInAnimation";
-import pulseAnimation from "./styles/animations/PulseAnimation";
 import TecnologiesView from "./views/TecnologiesView";
 import tonyTecnologies from "./helpers/TonyTecnologies";
+import ProjectsView from "./views/ProjectsView";
+import ProjectView from "./views/ProjectView";
 
 const bubbleAnimation = keyframes`
   0% {
@@ -40,10 +41,12 @@ const logoAnimation = keyframes`
 `;
 
 const MainContainer = styled.div`
+transition: 2s;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  transform: translateX(calc(-100vw + 25vh));
 `;
 
 const TecnologyBanner = styled.img`
@@ -53,11 +56,11 @@ const TecnologyBanner = styled.img`
   bottom: 0;
   z-index: -1;
   transform: translate(20%, 20%);
-  height: 100vh;
+  height: 50vh;
   width: auto;
   -webkit-filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
   filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
-  animation: ${fadein} 2s forwards linear, ${pulseAnimation} 2s 2s infinite;
+  animation: ${fadein} 2s forwards linear;
 `;
 
 const Bubble = styled.div<{ x: number; y: number; delay: number }>`
@@ -121,7 +124,10 @@ const App: React.FC = () => {
               <Route index element={<IndexView />} />
               <Route path="about" element={<AboutView />} />
               <Route path="tecnologies" element={<TecnologiesView />} />
-              <Route path="projects" element={<AboutView />} />
+              <Route path="projects" element={<ProjectsView />} >
+
+                <Route path=":id" element={<ProjectView />} />
+              </Route>
               <Route path="contact" element={<AboutView />} />
             </Route>
           </Routes>
