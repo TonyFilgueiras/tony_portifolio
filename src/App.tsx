@@ -1,19 +1,43 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import ProfileContainer from "./components/ProfileContainer";
 import HomeView from "./views/HomeView";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AboutView from "./views/AboutView";
-import ContentContainer from "./components/ContentContainer";
+import IndexView from "./views/IndexView";
 import { theme } from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
+import fadein from "./styles/animations/FadeInAnimation";
+import pulseAnimation from "./styles/animations/PulseAnimation";
+import TecnologiesView from "./views/TecnologiesView";
+import tonyTecnologies from "./helpers/TonyTecnologies";
 
-import reactLogo from "./assets/reactLogo.png"
-import jsLogo from "./assets/jsLogo.png"
-import pythonLogo from "./assets/pythonLogo.png"
-import tsLogo from "./assets/tsLogo.png"
-import vueLogo from "./assets/vueLogo.png"
+const bubbleAnimation = keyframes`
+  0% {
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+    transform: translate(0, 0);
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    transform: translate(0, -100px);
+  }
+`;
+
+const logoAnimation = keyframes`
+  0% {   
+    width: 0px;
+    height: 0px;
+  }
+  100%{
+      width: 80px;
+      height: 80px;
+    }
+`;
 
 const MainContainer = styled.div`
   display: flex;
@@ -22,32 +46,29 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 
-const bubbleAnimation = keyframes`
-  0% {
-    width: 0px;
-    height: 0px;
-    transform: translate(0, 0);
-  }
-  100% {
-    width: 100px;
-    height: 100px;
-    transform: translate(0, -100px);
-  }
+const TecnologyBanner = styled.img`
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  transform: translate(20%, 20%);
+  height: 100vh;
+  width: auto;
+  -webkit-filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
+  filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
+  animation: ${fadein} 2s forwards linear, ${pulseAnimation} 2s 2s infinite;
 `;
 
-const Bubble = styled.img<{ x: number; y: number, delay: number }>`
+const Bubble = styled.div<{ x: number; y: number; delay: number }>`
   position: absolute;
   left: ${({ x }) => x}%;
   bottom: ${({ y }) => y}%;
-  width: 0px;
-  padding: 20px;
-  height: 0px;
-  background-color: transparent;
+  border-radius: 50%;
   border: 1px solid white;
-  border-radius: 100%;
-  animation: ${bubbleAnimation} 10s ${({delay})=>delay}s infinite ease-out ;
+  animation: ${bubbleAnimation} 10s ${({ delay }) => delay}s infinite ease-out;
 
-  &::after{
+  &::after {
     content: "";
     position: absolute;
     top: 20%;
@@ -57,36 +78,55 @@ const Bubble = styled.img<{ x: number; y: number, delay: number }>`
     border-radius: 50%;
     background-color: white;
   }
+
+  &:hover {
+    cursor: crosshair;
+  }
+`;
+
+const BubbleImg = styled.img<{ x: number; y: number; delay: number }>`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  animation: ${logoAnimation} 10s ${({ delay }) => delay}s infinite ease-out;
 `;
 
 const App: React.FC = () => {
-  const [themeColors, setThemeColors] = useState(theme)
+  const [themeColors, setThemeColors] = useState(theme);
+  const [bannerImg, setBannerImg] = useState("");
 
-  function changeThemeColors(text: string, bg: string, hover: string) {
-    setThemeColors({ colors:{ text, bg, hover } })
+  function changeThemeColors(text: string, bg: string, banner: string) {
+    setThemeColors({ colors: { text, bg } });
+    setBannerImg(banner);
   }
 
   return (
     <ThemeProvider theme={themeColors}>
       <GlobalStyle />
-      <MainContainer >
-        <Bubble delay={0} x={10} y={50} src={reactLogo} onClick={()=>changeThemeColors("#05c2cf", "#150074","#0000ff")}/>
-        <Bubble delay={1} x={20} y={5} src={jsLogo} onClick={()=>changeThemeColors("#000000", "#d6e600","#0000ff")}/>
-        <Bubble delay={1.4} x={40} y={73} src={pythonLogo} onClick={()=>changeThemeColors("#fffb00", "#060057","#0000ff")}/>
-        <Bubble delay={0.5} x={60} y={5} src={tsLogo} onClick={()=>changeThemeColors("#0026ff", "#ffffff","#0000ff")}/>
-        <Bubble delay={1.7} x={80} y={43} src={vueLogo} onClick={()=>changeThemeColors("#017507", "#01025c","#0000ff")}/>
+      <MainContainer>
+        {tonyTecnologies.map((tec) => {
+          return (
+            <Bubble key={tec.name } delay={tec.animationDelay} x={tec.xPosition} y={tec.yPosition} onClick={() => changeThemeColors(tec.textColor, tec.bgColor, tec.banner)}>
+              <BubbleImg delay={tec.animationDelay} x={tec.xPosition} y={tec.yPosition} src={tec.logo} />
+            </Bubble>
+          );
+        })}
         <ProfileContainer />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomeView />}>
-              <Route index element={<ContentContainer />} />
+              <Route index element={<IndexView />} />
               <Route path="about" element={<AboutView />} />
-              <Route path="tecnologies" element={<AboutView />} />
+              <Route path="tecnologies" element={<TecnologiesView />} />
               <Route path="projects" element={<AboutView />} />
               <Route path="contact" element={<AboutView />} />
             </Route>
           </Routes>
         </BrowserRouter>
+        <TecnologyBanner key={bannerImg} src={bannerImg} />
         <Footer />
       </MainContainer>
     </ThemeProvider>

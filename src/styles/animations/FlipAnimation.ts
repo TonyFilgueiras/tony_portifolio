@@ -5,7 +5,8 @@ const flipAnimation = keyframes`
     transform: rotateY(0);
 
   }
-  100% { transform: rotateY(90deg)
+  100% { 
+    transform: rotateY(90deg)
     scale(1.2) ;
     box-shadow: 10px 10px 10px 0px #00000022;
     }

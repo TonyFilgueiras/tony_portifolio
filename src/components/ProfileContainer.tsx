@@ -7,6 +7,7 @@ const ProfileContainerContainer = styled.div`
   text-align: center;
   width: 30vw;
   padding: 20px;
+  color: ${({theme})=> theme.colors.text};
 `;
 
 export default function ProfileContainer() {
