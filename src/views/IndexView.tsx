@@ -43,9 +43,9 @@ export default function IndexView() {
   return (
     <ContentContainer isFlipping={isFlipping} isReturning={isReturning}>
       <ListItem onClick={() => handleItemClick("about")}>About</ListItem>
-      <ListItem onClick={() => handleItemClick("tecnologies")}>Tecnologies</ListItem>
+      <ListItem onClick={() => handleItemClick("tecnologies")}>Other Tecnologies</ListItem>
       <ListItem onClick={() => handleItemClick("projects")}>Projects</ListItem>
-      <ListItem onClick={() => handleItemClick("contact")}>Contact</ListItem>
+      <ListItem onClick={() => handleItemClick("emailme")}>Email Me</ListItem>
     </ContentContainer>
   );
 }

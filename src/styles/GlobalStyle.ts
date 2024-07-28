@@ -12,9 +12,13 @@ a {
   text-decoration: none;
 }
 
-p, h1, h2, footer{
+p, h1, h2, footer, span, a{
   transition: .3s;
   color: ${({ theme }) => theme.colors.text}
+}
+
+span, a {
+  font-size: 1.3rem
 }
 
 h1{

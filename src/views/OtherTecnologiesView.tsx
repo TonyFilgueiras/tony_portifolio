@@ -3,29 +3,36 @@ import styled from "styled-components";
 import ContentContainer from "../components/ContentContainer";
 import React from "react";
 import ContentHeader from "../components/ContentHeader";
-import tonyTecnologies from "../helpers/TonyTecnologies";
+import { otherTecnologies } from "../helpers/TonyTecnologies";
 
-const TecnologiesContainer = styled.div`
+const OtherTecnologiesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1px;
 `
 
 const TecnologyItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  transition: all.3s;
   text-align: center;
   border: 1px solid ${({ theme }) => theme.colors.text};
-  `
+
+  &:hover{
+    -webkit-filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
+    filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
+
+  }
+`;
 
 const TecnologyLogo = styled.img`
   width: 80px;
-  height: 80px;
-  -webkit-filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
-  filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
-  /* border: 1px solid red; */
 `
 
-export default function TecnologiesView() {
+export default function OtherTecnologiesView() {
   const navigate = useNavigate();
   const [isFlipping, setIsFlipping] = React.useState(false);
   const [isReturning, setIsReturning] = React.useState(false);
@@ -44,22 +51,22 @@ export default function TecnologiesView() {
     setTimeout(() => {
       setIsFlipping(false);
       setIsReturning(false);
-      navigate(-1);
+      navigate("/");
     }, 400);
   }
 
   return (
     <ContentContainer isFlipping={isFlipping} isReturning={isReturning}>
-      <ContentHeader title="Tecnologies" onReturnButtonClick={handleReturnButtonClicked} /> 
-      <TecnologiesContainer>
-      {tonyTecnologies.map((tec)=>{
+      <ContentHeader title="Other Tecnologies" onReturnButtonClick={handleReturnButtonClicked} /> 
+      <OtherTecnologiesContainer>
+      {otherTecnologies.map((tec)=>{
         return (
           <TecnologyItem title={tec.name} key={tec.name}>
             <TecnologyLogo src={tec.logo } />
           </TecnologyItem>
         )
       })}
-      </TecnologiesContainer>
+      </OtherTecnologiesContainer>
     </ContentContainer>
   );
 }

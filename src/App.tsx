@@ -9,10 +9,13 @@ import IndexView from "./views/IndexView";
 import { theme } from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import fadein from "./styles/animations/FadeInAnimation";
-import TecnologiesView from "./views/TecnologiesView";
-import tonyTecnologies from "./helpers/TonyTecnologies";
+import OtherTecnologiesView from "./views/OtherTecnologiesView";
+import tonyTecnologies, { Tecnologies } from "./helpers/TonyTecnologies";
 import ProjectsView from "./views/ProjectsView";
 import ProjectView from "./views/ProjectView";
+import ViewingProjectContext from "./contexts/ViewingProjectContext";
+import CurrentThemeContext from "./contexts/CurrentThemeContext";
+import EmailMeView from "./views/EmailMeView";
 
 const bubbleAnimation = keyframes`
   0% {
@@ -40,13 +43,13 @@ const logoAnimation = keyframes`
     }
 `;
 
-const MainContainer = styled.div`
-transition: 2s;
+const MainContainer = styled.div<{ isviewingproject: boolean }>`
+  transition: 2s;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  transform: translateX(calc(-100vw + 25vh));
+  transform: ${({ isviewingproject }) => (isviewingproject ? "translateX(calc(-100vw + 25vh))" : "translateX(0)")};
 `;
 
 const TecnologyBanner = styled.img`
@@ -98,21 +101,23 @@ const BubbleImg = styled.img<{ x: number; y: number; delay: number }>`
 `;
 
 const App: React.FC = () => {
-  const [themeColors, setThemeColors] = useState(theme);
-  const [bannerImg, setBannerImg] = useState("");
-
-  function changeThemeColors(text: string, bg: string, banner: string) {
-    setThemeColors({ colors: { text, bg } });
-    setBannerImg(banner);
-  }
+  // const [themeColors, setThemeColors] = useState(theme);
+  const { isViewingProject } = React.useContext(ViewingProjectContext);
+  const { theme, changeTheme, bannerImg } = React.useContext(CurrentThemeContext);
 
   return (
-    <ThemeProvider theme={themeColors}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <MainContainer>
+      <MainContainer isviewingproject={isViewingProject}>
         {tonyTecnologies.map((tec) => {
           return (
-            <Bubble key={tec.name } delay={tec.animationDelay} x={tec.xPosition} y={tec.yPosition} onClick={() => changeThemeColors(tec.textColor, tec.bgColor, tec.banner)}>
+            <Bubble
+              key={tec.name}
+              delay={tec.animationDelay}
+              x={tec.xPosition}
+              y={tec.yPosition}
+              onClick={() => {if (!isViewingProject) changeTheme(tec)}}
+            >
               <BubbleImg delay={tec.animationDelay} x={tec.xPosition} y={tec.yPosition} src={tec.logo} />
             </Bubble>
           );
@@ -123,12 +128,11 @@ const App: React.FC = () => {
             <Route path="/" element={<HomeView />}>
               <Route index element={<IndexView />} />
               <Route path="about" element={<AboutView />} />
-              <Route path="tecnologies" element={<TecnologiesView />} />
-              <Route path="projects" element={<ProjectsView />} >
-
-                <Route path=":id" element={<ProjectView />} />
+              <Route path="tecnologies" element={<OtherTecnologiesView />} />
+              <Route path="projects" element={<ProjectsView />}>
+                <Route path=":projectId" element={<ProjectView />} />
               </Route>
-              <Route path="contact" element={<AboutView />} />
+              <Route path="emailme" element={<EmailMeView />} />
             </Route>
           </Routes>
         </BrowserRouter>

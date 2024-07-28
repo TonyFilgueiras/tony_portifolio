@@ -3,8 +3,10 @@ import ContentContainer from "../components/ContentContainer";
 import ContentHeader from "../components/ContentHeader";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import tonyProjects from "../helpers/TonyProjects";
+import tonyProjects, { Projects } from "../helpers/TonyProjects";
 import ReturnButtonComponent from "../components/ReturnButton";
+import CurrentThemeContext from "../contexts/CurrentThemeContext";
+import tonyTecnologies from "../helpers/TonyTecnologies";
 
 const ProjectButton = styled(ReturnButtonComponent)`
   position: absolute;
@@ -78,6 +80,7 @@ export default function ProjectsView() {
   const navigate = useNavigate();
   const [isFlipping, setIsFlipping] = React.useState(false);
   const [isReturning, setIsReturning] = React.useState<boolean>(false);
+  const {changeTheme} = React.useContext(CurrentThemeContext)
 
   React.useEffect(() => {
     setIsFlipping(true);
@@ -93,19 +96,23 @@ export default function ProjectsView() {
     setTimeout(() => {
       setIsFlipping(false);
       setIsReturning(false);
-      navigate(-1);
+      navigate("/");
     }, 400);
   }
 
-  function goToProjectPage(id: string) {
-    navigate(id);
+  function goToProjectPage(project: Projects) {
+    const mainTecnology = tonyTecnologies.find((tec) => tec.logo == project.mainTecnologyLogo)
+
+    changeTheme(mainTecnology!)
+
+    navigate(project.id);
   }
 
   return (
     <ContentContainer isFlipping={isFlipping} isReturning={isReturning}>
       <ContentHeader title="Projects" onReturnButtonClick={handleReturnButtonClicked} />
       {tonyProjects.map((proj) => (
-        <ProjectItem key={proj.name} onClick={() => goToProjectPage(proj.id)}>
+        <ProjectItem key={proj.name} onClick={() => goToProjectPage(proj)}>
           <ProjectLogo src={proj.mainTecnologyLogo} />
           {proj.name}
           <MoreInfoSpan>More Info</MoreInfoSpan>

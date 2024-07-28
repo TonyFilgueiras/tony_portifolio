@@ -29,7 +29,7 @@ export default function AboutView() {
     setTimeout(() => {
       setIsFlipping(false);
       setIsReturning(false);
-      navigate(-1);
+      navigate("/");
     }, 400);
   }
 
