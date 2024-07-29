@@ -109,8 +109,8 @@ export const otherTecnologies: OtherTecnologies[] = [
     name: "Godot",
     logo: godotLogo,
     banner: godotBanner,
-    textColor: "#8f9498",
-    bgColor: "#0e4f53",
+    textColor: "#FEFFFE",
+    bgColor: "#468CBF",
     
   },
   {
