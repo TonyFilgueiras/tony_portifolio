@@ -38,37 +38,52 @@ const ViewContainer = styled.div<{ slidingOut: boolean }>`
   /* border: 1px solid red; */
   text-align: center;
   border-radius: 25px;
-  /* animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out; */
+  animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out;
 
   @media (${device.sm}) {
     padding: 20px 0;
-    transform: translate(0%, 0%);
+    transform: translate(50%, 0%);
     top: 0vh;
     left: 0;
     height: 100vh;
     width: 100vw;
-    /* background-color: red; */
   }
 `;
 
 const Thumbnail = styled.img`
   width: 70vw;
   height: 50vh;
+
+  @media (${device.sm}) {
+    /* height: 100vh; */
+    width: 100vw;
+  }
 `;
 
 const Description = styled.h2`
   grid-column: 1 / span 2;
   padding: 20px 0;
+  @media (${device.sm}) {
+    font-size: 1rem;
+  }
 `;
 
 const InformationContainer = styled.div`
   display: grid;
   grid-gap: 20px 10px;
   grid-template-columns: 1fr 3fr;
+  @media (${device.sm}) {
+    grid-template-columns: 0.5fr 2fr;
+  }
+  
 `;
 
 const InformationTitle = styled.h2`
   text-align: end;
+
+  @media (${device.sm}) {
+    font-size: 0.8rem;
+  }
 `;
 
 const ProjectLink = styled.a`
@@ -77,10 +92,16 @@ const ProjectLink = styled.a`
   &:hover {
     text-decoration: underline;
   }
+  @media (${device.sm}) {
+    font-size: 0.8rem;
+  }
 `;
 
 const InformationContent = styled.span`
   text-align: start;
+  @media (${device.sm}) {
+    font-size: 0.8rem;
+  }
 `;
 
 export default function ProjectView() {
@@ -111,7 +132,7 @@ export default function ProjectView() {
     setTimeout(() => {
       navigate("/projects");
       
-    }, 2000)
+    }, 1000)
   }
 
   return (

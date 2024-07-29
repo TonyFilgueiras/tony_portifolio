@@ -64,9 +64,9 @@ const MainContainer = styled.div<{ isviewingproject: boolean }>`
     /* border: 1px solid red; */
     width: 100vw;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: auto;
 
-    transform: ${({ isviewingproject }) => (isviewingproject ? "translate(0, -70vh)" : "translate(0,0)")};
+    transform: ${({ isviewingproject }) => (isviewingproject ? "translate(00vw, 00vh)" : "translate(0,0)")};
   }
 `;
 

@@ -20,10 +20,6 @@ const ProjectButton = styled(ReturnButtonComponent)`
   &:hover {
     background: transparent;
   }
-  
-  @media (${device.sm}) {
-    transform: rotate(270deg);
-  }
 `;
 
 const MoreInfoSpan = styled.span`
@@ -77,14 +73,13 @@ const ProjectView = styled.div<{ isviewingproject: boolean }>`
   position: fixed;
   left: 100vw;
   top: 0;
-  height: ${({ isviewingproject }) => (isviewingproject? "100vh": "0vh")};
-
+  height: 100vh;
+  
   width: 100vw;
-
+  
   @media (${device.sm}) {
-    background: cyan;
-    left: 0;
-    top: 100vh;
+    position: static;
+    height:0vh;
   }
 `;
 

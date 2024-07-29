@@ -9,6 +9,7 @@ const HomeViewContainer = styled.div`
 
   @media (${device.sm}) {
     width: 100vw;
+    /* display: none; */
     /* border: 1px solid white; */
   }
 `;

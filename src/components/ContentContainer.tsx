@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import hexToRgba from '../helpers/hexToRgba';
 import flipAnimation from '../styles/animations/FlipAnimation';
 import { device } from '../styles/Breakpoint';
+import ViewingProjectContext from '../contexts/ViewingProjectContext';
 
-const StyledContentContainer = styled.div<{ isFlipping: boolean; isReturning: boolean }>`
+const StyledContentContainer = styled.div<{ isFlipping: boolean; isReturning: boolean; isViewingProject: boolean }>`
   /* padding: 20px; */
   height: 100%;
   animation: ${({ isFlipping }) => (isFlipping ? flipAnimation : "none")} 0.4s ${({ isReturning }) => (isReturning ? "forwards" : "reverse")} linear;
@@ -15,6 +16,8 @@ const StyledContentContainer = styled.div<{ isFlipping: boolean; isReturning: bo
   z-index: 3;
 
   @media (${device.sm}) {
+    transform: ${({ isViewingProject }) => isViewingProject ? "translateX(-100%)" : 'translateX(00%)'};
+    transition: 2s;
     overflow: visible;
   }
 `;
@@ -26,8 +29,10 @@ interface ContentContainerProps {
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = ({ isFlipping, isReturning, children }) => {
+  const {isViewingProject} = React.useContext(ViewingProjectContext)
+
   return (
-    <StyledContentContainer isFlipping={isFlipping} isReturning={isReturning}>
+    <StyledContentContainer isFlipping={isFlipping} isReturning={isReturning} isViewingProject={isViewingProject}>
       {children}
     </StyledContentContainer>
   );
