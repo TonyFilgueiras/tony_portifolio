@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# Personal Portifolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Projects
 
-Currently, two official plugins are available:
+- [Quais são as chances](https://tonyfilgueiras.github.io/quais-sao-as-chances/)
+- [Basic Unit Converter](https://play.google.com/store/apps/details?id=com.expo.buc)
+- [HollyPlans](https://hollyplans.netlify.app)
+- [All About Marvel](https://allaboutmarvel.vercel.app/)
+- [Haxball Hockey Bot](https://github.com/TonyFilgueiras/haxball-hockey-bot)
+- [Tony's Conversions](https://tonys-conversions.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Tecnologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Main Tecnologies
 
-- Configure the top-level `parserOptions` property like this:
+- React
+- Vue
+- Python
+- Typescript
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Other Tecnologies
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- JavaScript
+- AWS
+- Figma
+- Godot
+- HTML
+- CSS
+- mysql
+- Java
