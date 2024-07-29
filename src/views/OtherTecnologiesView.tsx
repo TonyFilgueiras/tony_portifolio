@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import ContentContainer from "../components/ContentContainer";
 import React from "react";
 import ContentHeader from "../components/ContentHeader";
 import { otherTecnologies } from "../helpers/TonyTecnologies";
-import hexToRgba from "../helpers/hexToRgba";
 import CurrentThemeContext from "../contexts/CurrentThemeContext";
 
 const OtherTecnologiesContainer = styled.div`
