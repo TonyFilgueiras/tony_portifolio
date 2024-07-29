@@ -17,7 +17,15 @@ import tsBanner from "../assets/tecBanners/tsBanner.png";
 import vueBanner from "../assets/tecBanners/vueBanner.png";
 import pythonBanner from "../assets/tecBanners/pythonBanner.png";
 
+import awsBanner from "../assets/tecBanners/awsBanner.png";
+import cssBanner from "../assets/tecBanners/cssBanner.png";
+import figmaBanner from "../assets/tecBanners/figmaBanner.png";
+import godotBanner from "../assets/tecBanners/godotBanner.png";
+import htmlBanner from "../assets/tecBanners/htmlBanner.png";
+import javaBanner from "../assets/tecBanners/javaBanner.png";
 import jsBanner from "../assets/tecBanners/jsBanner.png";
+import mysqlBanner from "../assets/tecBanners/mysqlBanner.png";
+
 
 export interface Tecnologies {
   name: string;
@@ -30,7 +38,7 @@ export interface Tecnologies {
   animationDelay: number;
 }
 
-interface OtherTecnologies {
+export interface OtherTecnologies {
   name: string,
   logo: string,
   banner: string;
@@ -85,14 +93,14 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "AWS",
     logo: awsLogo,
-    banner: "",
+    banner: awsBanner,
     textColor: "#ff9900",
     bgColor: "#232f3e",
   },
   {
     name: "Figma",
     logo: figmaLogo,
-    banner: "",
+    banner: figmaBanner,
     textColor: "#f24e1e",
     bgColor: "#1abcfe",
     
@@ -100,7 +108,7 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "Godot",
     logo: godotLogo,
-    banner: "",
+    banner: godotBanner,
     textColor: "#8f9498",
     bgColor: "#0e4f53",
     
@@ -116,7 +124,7 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "Java",
     logo: javaLogo,
-    banner: "",
+    banner: javaBanner,
     textColor: "#f36c4e",
     bgColor: "#0156a8",
     
@@ -124,7 +132,7 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "HTML",
     logo: htmlLogo,
-    banner: "",
+    banner: htmlBanner,
     textColor: "#f06529",
     bgColor: "#000000",
     
@@ -132,7 +140,7 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "CSS",
     logo: cssLogo,
-    banner: "",
+    banner: cssBanner,
     textColor: "#ebebeb",
     bgColor: "#2965f1",
     
@@ -140,7 +148,7 @@ export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "mysql",
     logo: mysqlLogo,
-    banner: "",
+    banner: mysqlBanner,
     textColor: "#f29111",
     bgColor: "#00758f",
     

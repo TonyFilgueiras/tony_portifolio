@@ -40,6 +40,9 @@ const ViewContainer = styled.div<{ slidingOut: boolean }>`
   border-radius: 25px;
   animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out;
 
+  @media (${device.md}) {
+    transform: translate(-15vh, -75%);
+  }
   @media (${device.sm}) {
     padding: 20px 0;
     transform: translate(50%, 0%);
@@ -48,6 +51,7 @@ const ViewContainer = styled.div<{ slidingOut: boolean }>`
     height: 100vh;
     width: 100vw;
   }
+
 `;
 
 const Thumbnail = styled.img`

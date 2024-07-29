@@ -1,6 +1,6 @@
 import React from "react";
 import { DefaultTheme } from "styled-components";
-import { Tecnologies } from "../helpers/TonyTecnologies";
+import { OtherTecnologies, Tecnologies } from "../helpers/TonyTecnologies";
 
 // Define the interface for the theme context properties
 interface CurrentThemeContextProps {
@@ -11,7 +11,7 @@ interface CurrentThemeContextProps {
 interface CurrentThemeContextType {
   theme: DefaultTheme;
   bannerImg: string
-  changeTheme: (theme: Tecnologies) => void;
+  changeTheme: (theme: Tecnologies| OtherTecnologies) => void;
 }
 
 // Initial value for the theme context
@@ -34,7 +34,7 @@ export const CurrentThemeContextProvider = ({ children }: CurrentThemeContextPro
   const [theme, setTheme] = React.useState<DefaultTheme>(initialValue.theme);
   const [bannerImg, setBannerImg] = React.useState("");
 
-  function changeTheme(newTheme: Tecnologies) {
+  function changeTheme(newTheme: Tecnologies | OtherTecnologies) {
     setTheme({ colors: { text: newTheme.textColor, bg: newTheme.bgColor } })
     setBannerImg(newTheme.banner)
   }

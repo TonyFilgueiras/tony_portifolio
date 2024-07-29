@@ -15,6 +15,10 @@ const StyledContentContainer = styled.div<{ isFlipping: boolean; isReturning: bo
   position: relative;
   z-index: 3;
 
+  @media (${device.md}) {
+    transform: ${({ isViewingProject }) => isViewingProject ? "translateX(-100vw)" : 'translateX(00%)'};
+    transition: 2s;
+  }
   @media (${device.sm}) {
     transform: ${({ isViewingProject }) => isViewingProject ? "translateX(-100%)" : 'translateX(00%)'};
     transition: 2s;

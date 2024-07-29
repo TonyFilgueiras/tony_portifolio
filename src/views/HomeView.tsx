@@ -7,11 +7,18 @@ const HomeViewContainer = styled.div`
   /* height: 40vh; */
   padding: 20px;
 
+
+  @media (${device.lg}) {
+    width: 70vw;
+  }
+  @media (${device.md}) {
+    width: 50vw;
+  }
   @media (${device.sm}) {
     width: 100vw;
-    /* display: none; */
-    /* border: 1px solid white; */
   }
+
+
 `;
 
 export default function HomeView() {

@@ -21,6 +21,9 @@ const ProfileImage = styled.img`
   width: 300px;
   border: 7px outset ${({ theme }) => theme.colors.text};
 
+  @media (${device.md}) {
+    width: 30vw;
+  }
   @media (${device.sm}) {
     width: 50vw;
   }
