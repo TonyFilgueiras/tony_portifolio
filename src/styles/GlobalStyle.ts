@@ -8,7 +8,7 @@ body{
   overflow: hidden;
 }
 
-div, button, img{
+div, button, img, p, h1, h2, footer, span, a{
   transition: all.3s;
 }
 
@@ -17,7 +17,6 @@ a {
 }
 
 p, h1, h2, footer, span, a{
-  transition: .3s;
   color: ${({ theme }) => theme.colors.text}
 }
 
