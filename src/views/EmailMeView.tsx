@@ -8,6 +8,7 @@ import DefaultButton from "../components/DefaultButton";
 
 const Form = styled.form`
   display: flex;
+  padding: 20px;
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;

@@ -7,6 +7,7 @@ import hexToRgba from "../helpers/hexToRgba";
 import tonyProjects, { Projects } from "../helpers/TonyProjects";
 import CurrentThemeContext from "../contexts/CurrentThemeContext";
 import tonyTecnologies from "../helpers/TonyTecnologies";
+import { device } from "../styles/Breakpoint";
 
 const slideIn = keyframes`
   from{
@@ -37,7 +38,17 @@ const ViewContainer = styled.div<{ slidingOut: boolean }>`
   /* border: 1px solid red; */
   text-align: center;
   border-radius: 25px;
-  animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out;
+  /* animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out; */
+
+  @media (${device.sm}) {
+    padding: 20px 0;
+    transform: translate(0%, 0%);
+    top: 0vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    /* background-color: red; */
+  }
 `;
 
 const Thumbnail = styled.img`

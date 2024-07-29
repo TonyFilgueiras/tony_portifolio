@@ -17,6 +17,8 @@ import tsBanner from "../assets/tecBanners/tsBanner.png";
 import vueBanner from "../assets/tecBanners/vueBanner.png";
 import pythonBanner from "../assets/tecBanners/pythonBanner.png";
 
+import jsBanner from "../assets/tecBanners/jsBanner.png";
+
 export interface Tecnologies {
   name: string;
   banner: string;
@@ -31,6 +33,9 @@ export interface Tecnologies {
 interface OtherTecnologies {
   name: string,
   logo: string,
+  banner: string;
+  textColor: string;
+  bgColor: string;
 }
 
 const tonyTecnologies: Tecnologies[] = [
@@ -79,41 +84,65 @@ const tonyTecnologies: Tecnologies[] = [
 export const otherTecnologies: OtherTecnologies[] = [
   {
     name: "AWS",
-    logo: awsLogo
+    logo: awsLogo,
+    banner: "",
+    textColor: "#ff9900",
+    bgColor: "#232f3e",
   },
   {
     name: "Figma",
-    logo: figmaLogo
+    logo: figmaLogo,
+    banner: "",
+    textColor: "#f24e1e",
+    bgColor: "#1abcfe",
     
   },
   {
     name: "Godot",
-    logo: godotLogo
+    logo: godotLogo,
+    banner: "",
+    textColor: "#8f9498",
+    bgColor: "#0e4f53",
     
   },
   {
     name: "Javascript",
-    logo: jsLogo
+    logo: jsLogo,
+    banner: jsBanner,
+    textColor: "#323330",
+    bgColor: '#F0DB4F',
     
   },
   {
     name: "Java",
-    logo: javaLogo
+    logo: javaLogo,
+    banner: "",
+    textColor: "#f36c4e",
+    bgColor: "#0156a8",
     
   },
   {
     name: "HTML",
-    logo: htmlLogo
+    logo: htmlLogo,
+    banner: "",
+    textColor: "#f06529",
+    bgColor: "#000000",
     
   },
   {
     name: "CSS",
-    logo: cssLogo
+    logo: cssLogo,
+    banner: "",
+    textColor: "#ebebeb",
+    bgColor: "#2965f1",
     
   },
   {
     name: "mysql",
-    logo: mysqlLogo
+    logo: mysqlLogo,
+    banner: "",
+    textColor: "#f29111",
+    bgColor: "#00758f",
     
    },
 ];

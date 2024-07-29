@@ -8,6 +8,7 @@ const ParagraphStyle = styled.p`
   text-indent: 20px;
   line-height: 1.5rem;
   text-shadow: 2px 5px 5px ${({ theme }) => theme.colors.bg};
+  padding: 20px;
 `;
 
 export default function AboutView() {

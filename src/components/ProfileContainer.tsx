@@ -4,18 +4,26 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 import circle from "../assets/tony.png";
 import DefaultButton from "./DefaultButton";
+import { device } from "../styles/Breakpoint";
 
 const ProfileContainerContainer = styled.div`
   text-align: center;
   width: 30vw;
   padding: 20px;
   color: ${({ theme }) => theme.colors.text};
+  @media (${device.sm}) {
+    width: auto;
+  }
 `;
 
 const ProfileImage = styled.img`
   border-radius: 50%;
   width: 300px;
   border: 7px outset ${({ theme }) => theme.colors.text};
+
+  @media (${device.sm}) {
+    width: 50vw;
+  }
 `;
 
 const IconContainer = styled.div`

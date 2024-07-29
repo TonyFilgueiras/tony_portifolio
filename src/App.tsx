@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import ProfileContainer from "./components/ProfileContainer";
@@ -9,12 +9,13 @@ import IndexView from "./views/IndexView";
 import GlobalStyle from "./styles/GlobalStyle";
 import fadein from "./styles/animations/FadeInAnimation";
 import OtherTecnologiesView from "./views/OtherTecnologiesView";
-import tonyTecnologies from "./helpers/TonyTecnologies";
+import tonyTecnologies, { Tecnologies } from "./helpers/TonyTecnologies";
 import ProjectsView from "./views/ProjectsView";
 import ProjectView from "./views/ProjectView";
 import ViewingProjectContext from "./contexts/ViewingProjectContext";
 import CurrentThemeContext from "./contexts/CurrentThemeContext";
 import EmailMeView from "./views/EmailMeView";
+import { device } from "./styles/Breakpoint";
 
 const bubbleAnimation = keyframes`
   0% {
@@ -31,15 +32,19 @@ const bubbleAnimation = keyframes`
   }
 `;
 
-const logoAnimation = keyframes`
-  0% {   
-    width: 0px;
-    height: 0px;
+const bubblePop = keyframes`
+  0% {
+    opacity: 1;
+    /* transform: scale(1); */
   }
-  100%{
-      width: 80px;
-      height: 80px;
-    }
+  50%{
+    opacity: 0;
+    
+  }
+  100% {
+    opacity: 0;
+    transform: scale(10.5);
+  }
 `;
 
 const MainContainer = styled.div<{ isviewingproject: boolean }>`
@@ -49,6 +54,20 @@ const MainContainer = styled.div<{ isviewingproject: boolean }>`
   align-items: center;
   height: 100vh;
   transform: ${({ isviewingproject }) => (isviewingproject ? "translateX(calc(-100vw + 25vh))" : "translateX(0)")};
+
+  @media (${device.sm}) {
+    /* padding: 10px 0; */
+    /* padding-bottom: 100px; */
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    /* border: 1px solid red; */
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: visible;
+
+    transform: ${({ isviewingproject }) => (isviewingproject ? "translate(0, -70vh)" : "translate(0,0)")};
+  }
 `;
 
 const TecnologyBanner = styled.img`
@@ -65,13 +84,17 @@ const TecnologyBanner = styled.img`
   animation: ${fadein} 2s forwards linear;
 `;
 
-const Bubble = styled.div<{ x: number; y: number; delay: number }>`
+const Bubble = styled.div<{ x: number; y: number; delay: number; popped: boolean }>`
   position: absolute;
+  padding: 20px;
   left: ${({ x }) => x}%;
   bottom: ${({ y }) => y}%;
   border-radius: 50%;
   border: 1px solid white;
-  animation: ${bubbleAnimation} 10s ${({ delay }) => delay}s infinite ease-out;
+  animation: ${({ popped }) => (popped ? bubblePop : bubbleAnimation)} ${({ popped }) => (popped ? "1s" : "10s")}
+    ${({ popped }) => (popped ? "forwards" : "infinite")} ease-out;
+  /* animation-delay: ${({ popped, delay }) => (popped ? "0s" : `${delay}s`)}; */
+  /* opacity: ${({ popped }) => (popped ? 0 : 1)}; */
 
   &::after {
     content: "";
@@ -89,38 +112,46 @@ const Bubble = styled.div<{ x: number; y: number; delay: number }>`
   }
 `;
 
-const BubbleImg = styled.img<{ x: number; y: number; delay: number }>`
+const BubbleImg = styled.img`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 0px;
-  height: 0px;
-  animation: ${logoAnimation} 10s ${({ delay }) => delay}s infinite ease-out;
+  width: 70%;
+  height: 70%;
 `;
 
 const App: React.FC = () => {
-  // const [themeColors, setThemeColors] = useState(theme);
   const { isViewingProject } = React.useContext(ViewingProjectContext);
   const { theme, changeTheme, bannerImg } = React.useContext(CurrentThemeContext);
+  const [poppedBubbles, setPoppedBubbles] = useState<{ [key: string]: boolean }>({});
+
+  function popBubble(tecnology: Tecnologies) {
+    changeTheme(tecnology);
+    setPoppedBubbles((prev) => ({ ...prev, [tecnology.name]: true }));
+    setTimeout(() => {
+      setPoppedBubbles((prev) => ({ ...prev, [tecnology.name]: false }));
+    }, 1000);
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MainContainer isviewingproject={isViewingProject}>
-        {tonyTecnologies.map((tec) => {
-          return (
-            <Bubble
-              key={tec.name}
-              delay={tec.animationDelay}
-              x={tec.xPosition}
-              y={tec.yPosition}
-              onClick={() => {if (!isViewingProject) changeTheme(tec)}}
-            >
-              <BubbleImg delay={tec.animationDelay} x={tec.xPosition} y={tec.yPosition} src={tec.logo} />
-            </Bubble>
-          );
-        })}
+        {tonyTecnologies.map((tec) => (
+          <Bubble
+            key={tec.name}
+            popped={poppedBubbles[tec.name] || false}
+            delay={tec.animationDelay}
+            x={tec.xPosition}
+            y={tec.yPosition}
+            onClick={() => {
+              if (!isViewingProject) popBubble(tec);
+            }}
+          >
+            <BubbleImg src={tec.logo} />
+          </Bubble>
+        ))}
         <ProfileContainer />
         <BrowserRouter>
           <Routes>

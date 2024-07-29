@@ -5,6 +5,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const HomeTitle = styled.h2`

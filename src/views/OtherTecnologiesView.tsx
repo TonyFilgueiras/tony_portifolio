@@ -21,8 +21,8 @@ const TecnologyItem = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.text};
 
   &:hover{
-    -webkit-filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
-    filter: drop-shadow(-20px 5px 50px ${({ theme }) => theme.colors.text});
+    -webkit-filter: drop-shadow(0px 0px 50px ${({ theme }) => theme.colors.text});
+    filter: drop-shadow(0px 0px 50px ${({ theme }) => theme.colors.text});
 
   }
 `;

@@ -7,6 +7,8 @@ import tonyProjects, { Projects } from "../helpers/TonyProjects";
 import ReturnButtonComponent from "../components/ReturnButton";
 import CurrentThemeContext from "../contexts/CurrentThemeContext";
 import tonyTecnologies from "../helpers/TonyTecnologies";
+import { device } from "../styles/Breakpoint";
+import ViewingProjectContext from "../contexts/ViewingProjectContext";
 
 const ProjectButton = styled(ReturnButtonComponent)`
   position: absolute;
@@ -17,6 +19,10 @@ const ProjectButton = styled(ReturnButtonComponent)`
 
   &:hover {
     background: transparent;
+  }
+  
+  @media (${device.sm}) {
+    transform: rotate(270deg);
   }
 `;
 
@@ -67,20 +73,27 @@ const ProjectLogo = styled.img`
   top: 30px;
 `;
 
-const ProjectView = styled.div`
+const ProjectView = styled.div<{ isviewingproject: boolean }>`
   position: fixed;
   left: 100vw;
   top: 0;
-  height: 100vh;
+  height: ${({ isviewingproject }) => (isviewingproject? "100vh": "0vh")};
 
   width: 100vw;
+
+  @media (${device.sm}) {
+    background: cyan;
+    left: 0;
+    top: 100vh;
+  }
 `;
 
 export default function ProjectsView() {
   const navigate = useNavigate();
   const [isFlipping, setIsFlipping] = React.useState(false);
   const [isReturning, setIsReturning] = React.useState<boolean>(false);
-  const {changeTheme} = React.useContext(CurrentThemeContext)
+  const { changeTheme } = React.useContext(CurrentThemeContext)
+  const { isViewingProject } = React.useContext(ViewingProjectContext);
 
   React.useEffect(() => {
     setIsFlipping(true);
@@ -119,7 +132,7 @@ export default function ProjectsView() {
           <ProjectButton />
         </ProjectItem>
       ))}
-      <ProjectView>
+      <ProjectView isviewingproject={isViewingProject}>
         <Outlet />
       </ProjectView>
     </ContentContainer>
