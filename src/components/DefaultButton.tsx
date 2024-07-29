@@ -6,7 +6,6 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> &{
 }
 
 const DefaultButtonContainer = styled.button`
-  transition: all.3s;
   padding: 10px;
   border-radius: 5px;
   border: none;

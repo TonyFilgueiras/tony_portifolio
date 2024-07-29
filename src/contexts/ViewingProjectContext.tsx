@@ -1,5 +1,4 @@
 import React from "react";
-import { DefaultTheme } from "styled-components";
 
 // Define the interface for the theme context properties
 interface ViewingProjectContextProps {

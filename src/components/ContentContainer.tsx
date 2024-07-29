@@ -4,7 +4,6 @@ import hexToRgba from '../helpers/hexToRgba';
 import flipAnimation from '../styles/animations/FlipAnimation';
 
 const StyledContentContainer = styled.div<{ isFlipping: boolean; isReturning: boolean }>`
-  transition: all 0.3s;
   padding: 20px;
   height: 100%;
   animation: ${({ isFlipping }) => (isFlipping ? flipAnimation : "none")} 0.4s ${({ isReturning }) => (isReturning ? "forwards" : "reverse")} linear;

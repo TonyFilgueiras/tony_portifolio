@@ -9,7 +9,6 @@ const ReturnButton = styled.button`
   height: 40px;
   width: 40px;
   line-height: 7px;
-  transition: all.3s;
   color: ${({ theme }) => theme.colors.text};
   z-index: 2;
 

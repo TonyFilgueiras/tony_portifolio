@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import ProfileContainer from "./components/ProfileContainer";
@@ -6,11 +6,10 @@ import HomeView from "./views/HomeView";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AboutView from "./views/AboutView";
 import IndexView from "./views/IndexView";
-import { theme } from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import fadein from "./styles/animations/FadeInAnimation";
 import OtherTecnologiesView from "./views/OtherTecnologiesView";
-import tonyTecnologies, { Tecnologies } from "./helpers/TonyTecnologies";
+import tonyTecnologies from "./helpers/TonyTecnologies";
 import ProjectsView from "./views/ProjectsView";
 import ProjectView from "./views/ProjectView";
 import ViewingProjectContext from "./contexts/ViewingProjectContext";

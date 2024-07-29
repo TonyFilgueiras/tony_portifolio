@@ -8,6 +8,10 @@ body{
   overflow: hidden;
 }
 
+div, button, img{
+  transition: all.3s;
+}
+
 a {
   text-decoration: none;
 }

@@ -17,7 +17,6 @@ const TecnologyItem = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px;
-  transition: all.3s;
   text-align: center;
   border: 1px solid ${({ theme }) => theme.colors.text};
 
