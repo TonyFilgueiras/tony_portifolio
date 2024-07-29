@@ -62,7 +62,7 @@ export default function EmailMeView() {
     setError("");
     setSuccess("");
 
-    emailjs.sendForm("service_yk0879t", "template_hulj48n", form.current!, "6sWN3uh5xdhmi5ml1").then(
+    emailjs.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, form.current!, import.meta.env.VITE_USER_ID).then(
       () => {
         setLoading(false);
         setSuccess("Email sent successfully!");
