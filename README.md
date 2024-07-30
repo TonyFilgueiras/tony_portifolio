@@ -1,5 +1,8 @@
 # Personal Portifolio
 
+![portifolio_thumbnail](https://github.com/user-attachments/assets/22c26412-2c85-4df6-8ce1-f96a00e0f6cb)
+
+
 ## Projects
 
 - [Quais são as chances](https://tonyfilgueiras.github.io/quais-sao-as-chances/)
