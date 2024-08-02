@@ -16,6 +16,7 @@ import ViewingProjectContext from "./contexts/ViewingProjectContext";
 import CurrentThemeContext from "./contexts/CurrentThemeContext";
 import EmailMeView from "./views/EmailMeView";
 import { device } from "./styles/Breakpoint";
+import NotFoundView from "./views/NotFoundView";
 
 const bubbleAnimation = keyframes`
   0% {
@@ -161,9 +162,11 @@ const App: React.FC = () => {
               <Route path="tecnologies" element={<OtherTecnologiesView />} />
               <Route path="projects" element={<ProjectsView />}>
                 <Route path=":projectId" element={<ProjectView />} />
+                <Route path="*" element={<NotFoundView />} /> {/* Catch-all 404 route */}
               </Route>
               <Route path="emailme" element={<EmailMeView />} />
             </Route>
+            <Route path="*" element={<NotFoundView />} /> {/* Catch-all 404 route */}
           </Routes>
         </BrowserRouter>
         <TecnologyBanner key={bannerImg} src={bannerImg} />

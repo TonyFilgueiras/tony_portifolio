@@ -28,14 +28,12 @@ const slideOut = keyframes`
 
 const ViewContainer = styled.div<{ slidingOut: boolean }>`
   padding: 20px;
-  /* height: calc(100vh - 40px); */
   position: absolute;
   top: 50%;
   left: 50%;
   width: 80%;
   transform: translate(calc(-25vh - 50%), -50%);
   background: ${({ theme }) => hexToRgba(theme.colors.bg, 0.5)};
-  /* border: 1px solid red; */
   text-align: center;
   border-radius: 25px;
   animation: ${({ slidingOut }) => (slidingOut ? slideOut : slideIn)} 2s forwards ease-out;
@@ -51,16 +49,16 @@ const ViewContainer = styled.div<{ slidingOut: boolean }>`
     height: 100vh;
     width: 100vw;
   }
-
 `;
 
 const Thumbnail = styled.img`
   width: 70vw;
   height: 50vh;
-
+  object-fit: cover;
+  
   @media (${device.sm}) {
-    /* height: 100vh; */
     width: 100vw;
+    object-fit: contain;
   }
 `;
 
@@ -79,7 +77,6 @@ const InformationContainer = styled.div`
   @media (${device.sm}) {
     grid-template-columns: 0.5fr 2fr;
   }
-  
 `;
 
 const InformationTitle = styled.h2`
@@ -108,51 +105,68 @@ const InformationContent = styled.span`
   }
 `;
 
+const NotFoundMessage = styled.h2`
+  color: red;
+  text-align: center;
+  padding: 20px;
+`;
+
 export default function ProjectView() {
   const { setIsViewingProject } = React.useContext(ViewingProjectContext);
   const { changeTheme } = React.useContext(CurrentThemeContext);
   const { projectId } = useParams();
   const navigate = useNavigate();
 
-  const [slidingOut, setSlidingOut] = React.useState(false)
-  const [project, setProject] = React.useState<Projects>();
+  const [slidingOut, setSlidingOut] = React.useState(false);
+  const [project, setProject] = React.useState<Projects | undefined>();
 
   React.useEffect(() => {
     setIsViewingProject(true);
-    const projectDisplayed = tonyProjects.find((proj) => proj.id == projectId);
+    const projectDisplayed = tonyProjects.find((proj) => proj.id === projectId);
 
-    const chosenTheme = tonyTecnologies.find((tec) => tec.logo == projectDisplayed?.mainTecnologyLogo);
+    if (!projectDisplayed) {
+      // If project is not found, navigate to a 404 or display a not found message
+      setProject(undefined);
+      return;
+    }
+
+    const chosenTheme = tonyTecnologies.find((tec) => tec.logo === projectDisplayed.mainTecnologyLogo);
 
     changeTheme(chosenTheme!);
-
     setProject(projectDisplayed);
-
-    console.log("oiaa")
-  }, []);
+  }, [projectId]);
 
   function returnButtonClicked() {
     setIsViewingProject(false);
-    setSlidingOut(true)
+    setSlidingOut(true);
     setTimeout(() => {
       navigate("/projects");
-      
-    }, 1000)
+    }, 1000);
+  }
+
+  if (!project) {
+    return (
+      <ViewContainer slidingOut={slidingOut}>
+        <ContentHeader onReturnButtonClick={returnButtonClicked} title="Project Not Found" />
+        <NotFoundMessage>Sorry, the project you are looking for does not exist.</NotFoundMessage>
+      </ViewContainer>
+    );
   }
 
   return (
     <ViewContainer slidingOut={slidingOut}>
-      <ContentHeader onReturnButtonClick={returnButtonClicked} title={project?.name} />
-      <Thumbnail src={project?.thumbnail} />
+      <ContentHeader onReturnButtonClick={returnButtonClicked} title={project.name} />
+      <Thumbnail src={project.thumbnail} />
       <InformationContainer>
-        <Description>{project?.about}</Description>
-        <InformationTitle>Link:</InformationTitle>{" "}
-        <ProjectLink target="_blank" rel="noopener noreferrer" href={project?.link}>
-          {project?.link}
+        <Description>{project.about}</Description>
+        <InformationTitle>Link:</InformationTitle>
+        <ProjectLink target="_blank" rel="noopener noreferrer" href={project.link}>
+          {project.link}
         </ProjectLink>
         <InformationTitle>Year:</InformationTitle>
-        <InformationContent>{project?.year}</InformationContent>
+        <InformationContent>{project.year}</InformationContent>
         <InformationTitle>Tecnologies:</InformationTitle>
-        <InformationContent>{project?.tecnologies.join(", ")}</InformationContent>
+        <InformationContent>{project.tecnologies.join(", ")}</InformationContent>
       </InformationContainer>
     </ViewContainer>
   );
