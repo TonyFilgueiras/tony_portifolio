@@ -32,6 +32,20 @@ const MoreInfoSpan = styled.span`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const StatusBadge = styled.span<{ active: boolean }>`
+  margin-left: auto;
+  margin-right: 60px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: all 0.7s ease;
+
+  background:  ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.bg};
+`;
+
 const ProjectItem = styled.div`
   display: flex;
   align-items: center;
@@ -60,6 +74,10 @@ const ProjectItem = styled.div`
   &:hover ${MoreInfoSpan} {
     transform: scaleX(1) translateX(-20px);
   }
+
+  &:hover ${StatusBadge} {
+    opacity: 0;
+  }
 `;
 
 const ProjectLogo = styled.img`
@@ -74,12 +92,12 @@ const ProjectView = styled.div<{ isviewingproject: boolean }>`
   left: 100vw;
   top: 0;
   height: 100vh;
-  
+
   width: 100vw;
-  
+
   @media (${device.sm}) {
     position: static;
-    height:0vh;
+    height: 0vh;
   }
 `;
 
@@ -87,7 +105,7 @@ export default function ProjectsView() {
   const navigate = useNavigate();
   const [isFlipping, setIsFlipping] = React.useState(false);
   const [isReturning, setIsReturning] = React.useState<boolean>(false);
-  const { changeTheme } = React.useContext(CurrentThemeContext)
+  const { changeTheme } = React.useContext(CurrentThemeContext);
   const { isViewingProject } = React.useContext(ViewingProjectContext);
 
   React.useEffect(() => {
@@ -109,9 +127,9 @@ export default function ProjectsView() {
   }
 
   function goToProjectPage(project: Projects) {
-    const mainTecnology = tonyTecnologies.find((tec) => tec.logo == project.mainTecnologyLogo)
+    const mainTecnology = tonyTecnologies.find((tec) => tec.logo == project.mainTecnologyLogo);
 
-    changeTheme(mainTecnology!)
+    changeTheme(mainTecnology!);
 
     navigate(project.id);
   }
@@ -123,6 +141,7 @@ export default function ProjectsView() {
         <ProjectItem key={proj.name} onClick={() => goToProjectPage(proj)}>
           <ProjectLogo src={proj.mainTecnologyLogo} />
           {proj.name}
+          {!proj.active && <StatusBadge active={false}>Discontinued</StatusBadge>}
           <MoreInfoSpan>More Info</MoreInfoSpan>
           <ProjectButton />
         </ProjectItem>

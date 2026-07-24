@@ -55,7 +55,7 @@ const Thumbnail = styled.img`
   width: 70vw;
   height: 50vh;
   object-fit: cover;
-  
+
   @media (${device.sm}) {
     width: 100vw;
     object-fit: contain;
@@ -111,6 +111,20 @@ const NotFoundMessage = styled.h2`
   padding: 20px;
 `;
 
+const StatusNotice = styled.div`
+  margin: auto;
+  width: fit-content;
+  padding: 16px;
+  border-radius: 8px;
+
+ background: #fff3cd14;
+  border: 1px solid ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.text};
+
+  font-weight: 500;
+  text-align: left;
+`;
+
 export default function ProjectView() {
   const { setIsViewingProject } = React.useContext(ViewingProjectContext);
   const { changeTheme } = React.useContext(CurrentThemeContext);
@@ -157,6 +171,12 @@ export default function ProjectView() {
     <ViewContainer slidingOut={slidingOut}>
       <ContentHeader onReturnButtonClick={returnButtonClicked} title={project.name} />
       <Thumbnail src={project.thumbnail} />
+      {!project.active && (
+        <StatusNotice>
+          ⚠️ This project has been discontinued and is no longer actively maintained. It is preserved here as part of my portfolio.
+        </StatusNotice>
+      )}
+
       <InformationContainer>
         <Description>{project.about}</Description>
         <InformationTitle>Link:</InformationTitle>

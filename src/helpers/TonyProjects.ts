@@ -7,6 +7,7 @@ import basicUnitConverter from "../assets/projectsThumbnail/basicUnitConverter.p
 import haxballHockeyBot from "../assets/projectsThumbnail/haxballHockeyBot.png"
 import hollyplans from "../assets/projectsThumbnail/hollyplans.png"
 import quaisSaoAsChances from "../assets/projectsThumbnail/quaisSaoAsChances.png"
+import brasileiraodle from "../assets/projectsThumbnail/brasileiraodle.png"
 import tonysConversions from "../assets/projectsThumbnail/tonysConversions.png"
 
 export interface Projects {
@@ -18,9 +19,21 @@ export interface Projects {
   about: string
   link: string
   year: string
+  active: boolean
 }
 
 const tonyProjects: Projects[] = [
+  {
+    id: "brasileiraodle",
+    name: "Brasileiraodle",
+    mainTecnologyLogo: reactLogo,
+    thumbnail: brasileiraodle,
+    tecnologies: ["React", "Vite", "Typescript", "MUI"],
+    about: "Wordle inspiration game made to guess the Brazilian football teams and other games",
+    link: "https://brasileiraodle.com.br/",
+    year: "2026",
+    active: true
+  },
   {
     id: "quais-sao-as-chances",
     name: "Quais são as chances",
@@ -29,7 +42,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["Vue3", "Vite", "Typescript", "AWS", "WebWorkers", "Python", "CSS"],
     about: "Website made to calculate the odds of each team, according to the league fixtures and table position.",
     link: "https://tonyfilgueiras.github.io/quais-sao-as-chances/",
-    year: "2024"
+    year: "2024",
+    active: false
   },
   {
     id: "basic-unit-converter",
@@ -39,7 +53,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["React Native", "Typescript", "Expo", "Google MobAds" ],
     about: "Android app made to convert basic units of measurements",
     link: "https://play.google.com/store/apps/details?id=com.expo.buc",
-    year: "2024"
+    year: "2024",
+    active: false
   },
   {
     id: "hollyplans",
@@ -49,7 +64,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["React", "Vite", "Typescript", "Styled Components", "Google Firebase" ],
     about: "Website made with time constraints for a job application",
     link: "https://hollyplans.netlify.app",
-    year: "2024"
+    year: "2024",
+    active: true
   },
   {
     id: "all-about-marvel",
@@ -59,7 +75,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["React", "Typescript", "Styled Components", "Axios", "md5" ],
     about: "Website made with time constraints for a job application",
     link: "https://allaboutmarvel.vercel.app/",
-    year: "2023"
+    year: "2023",
+    active: true
   },
   {
     id: "haxball-hockey-bot",
@@ -69,7 +86,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["Typescript", "NodeJs"],
     about: "Haxball bot made to enforce hockey map rules",
     link: "https://github.com/TonyFilgueiras/haxball-hockey-bot",
-    year: "2023"
+    year: "2023",
+    active: true
   },
   {
     id: "tonys-conversions",
@@ -79,7 +97,8 @@ const tonyProjects: Projects[] = [
     tecnologies: ["React","Typescript"],
     about: "Simple website made to convert basic unit measurements",
     link: "https://tonys-conversions.netlify.app/",
-    year: "2022"
+    year: "2022",
+    active: true
   },
 ];
 
