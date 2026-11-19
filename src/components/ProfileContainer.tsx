@@ -42,7 +42,7 @@ const IconContainer = styled.div`
 
 export default function ProfileContainer() {
   function handleLinkedInClick() {
-    window.open("https://www.linkedin.com/in/antonio-mosquera/", "_blank");
+    window.open("https://www.linkedin.com/in/antonio-filgueiras/", "_blank");
   }
 
   function handleGitHubClick() {
@@ -52,7 +52,7 @@ export default function ProfileContainer() {
   function handleDownloadClick() {
     const link = document.createElement("a");
     link.href = "/resume.pdf"; // Replace with the correct path to your PDF file
-    link.download = "Tony_Filgueiras_Resume.pdf"; // The name of the downloaded file
+    link.download = "Antonio_Filgueiras_Resume.pdf"; // The name of the downloaded file
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -61,7 +61,7 @@ export default function ProfileContainer() {
   return (
     <ProfileContainerContainer>
       <h1>Tony Filgueiras</h1>
-      <h2>Fullstack Developer</h2>
+      <h2>Full-Stack Software Engineer</h2>
       <ProfileImage src={circle} />
       <br />
       <IconContainer onClick={handleLinkedInClick} title="Linkedin">

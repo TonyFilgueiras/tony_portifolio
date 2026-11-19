@@ -9,6 +9,7 @@ import hollyplans from "../assets/projectsThumbnail/hollyplans.png"
 import quaisSaoAsChances from "../assets/projectsThumbnail/quaisSaoAsChances.png"
 import brasileiraodle from "../assets/projectsThumbnail/brasileiraodle.png"
 import tonysConversions from "../assets/projectsThumbnail/tonysConversions.png"
+import adminDashboard from "../assets/projectsThumbnail/adminDashboard.png"
 
 export interface Projects {
   id: string
@@ -23,6 +24,17 @@ export interface Projects {
 }
 
 const tonyProjects: Projects[] = [
+  {
+    id: "admin-dashboard",
+    name: "Admin Dashboard",
+    mainTecnologyLogo: reactLogo,
+    thumbnail: adminDashboard,
+    tecnologies: ["React", "Vite", "Typescript", "Styled Components", "Recharts"],
+    about: "Responsive admin dashboard for an online store, with sales KPIs, charts, sortable and searchable tables (orders, customers, products), reports and dark mode",
+    link: "https://admin-dashboard-sooty-mu-98.vercel.app/",
+    year: "2026",
+    active: true
+  },
   {
     id: "brasileiraodle",
     name: "Brasileiraodle",

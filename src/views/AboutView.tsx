@@ -37,7 +37,7 @@ export default function AboutView() {
   return (
     <ContentContainer isFlipping={isFlipping} isReturning={isReturning}>
       <ContentHeader title="About" onReturnButtonClick={handleReturnButtonClicked}/>
-      <ParagraphStyle>My name is Antonio Filgueiras, and I'm a full-stack developer with a passion for coding. I'm currently graduating in Computer Science and working on personal projects to pass the time. I'm also a musician and a gamer in my spare time.</ParagraphStyle>
+      <ParagraphStyle>My name is Antonio Filgueiras, and I'm a full-stack software engineer from Rio de Janeiro with 2+ years of experience building business applications with TypeScript, React, Next.js and Node.js. At TIVIT I build internal tools, workflow automations and multi-tenant SaaS applications running on AWS. I'm finishing my Computer Science degree and I'm open to remote work. In my spare time I'm a musician, a gamer and I make games with Godot.</ParagraphStyle>
     </ContentContainer>
   );
 }
